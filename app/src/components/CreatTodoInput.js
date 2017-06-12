@@ -1,64 +1,45 @@
-// import React from 'react';
-//
-//
-// var CreatTodoInput= React.createClass({
-//
-//     getInitialState: function() {
-//         return {
-//             newTodo: ''
-//         };
-//     },
-//     onChangeHandler: function(e) {
-//         this.setState({newTodo: e.target.value});
-//         console.log({newTodo: e.target.value});
-//     },
-//     render: function() {
-//
-//         return (
-//             <input
-//                 className="task-input"
-//                 type="text"
-//                 value={this.state.newTodo}
-//                 onChange={this.onChangeHandler}
-//                 placeholder='What should be done?'
-//             />
-//         );
-//     }
-//
-// });
-//
-// export default CreatTodoInput;
 import React, { Component, PropTypes}  from 'react';
+import classnames from 'classnames'
 
 export default class CreatTodoInput extends Component {
-    // запись для ES5
-    // getInitialState: function() {
-    //     return {
-    //         newTodo: ''
-    //     }
-    // }
-
-
-    // getInitialState запись для ES6
-        state =  {
-        newTodo: ''
+    static propTypes = {
+        onSave: PropTypes.func.isRequired,
+        text: PropTypes.string,
+        placeholder: PropTypes.string,
+        newTodo: PropTypes.bool
     }
-    onChangeHandler = (e) => {
-        this.setState({newTodo: e.target.value});
-        console.log({newTodo: e.target.value});
+
+    state = {
+        text: this.props.text || ''
     }
+
+    todoSubmit = e => {
+        const text = e.target.value.trim()
+        if (e.which === 13) {
+            this.props.onSave(text)
+            if (this.props.newTodo) {
+                this.setState({ text: '' })
+            }
+        }
+    }
+
+    taskCheckboxChange = e => {
+        this.setState({ text: e.target.value })
+    }
+
     render() {
-
         return (
-            <input
-                className="task-input"
-                type="text"
-                value={this.state.newTodo}
-                onChange={this.onChangeHandler}
-                placeholder='What should be done?'
-            />
+        <input className={
+            classnames({
+                'task-input': this.props.newTodo
+            })}
+               type="text"
+               placeholder={this.props.placeholder}
+               autoFocus="true"
+               value={this.state.text}
+               onChange={this.taskCheckboxChange}
+               onKeyDown={this.todoSubmit} />
         )
     }
-
 }
 

@@ -1,30 +1,28 @@
 import React, { Component, PropTypes} from 'react';
+import classnames from 'classnames'
 
 export default class TodoListItem extends Component {
     static propTypes = {
-        todoListItem:React.PropTypes.shape({
-            task: React.PropTypes.string.isRequired
-        })
+        todo: PropTypes.object.isRequired,
+        completeTodo: PropTypes.func.isRequired
     }
-    state =  {
-            visible: false
+    taskCompleteClick = () =>  {
+        this.props.completeTodo(this.props.todo.id);
     }
-    clickCloseButton = (e) => {
-        e.preventDefault();
-        this.setState({visible:true})
-    }
-
     render(){
-        let task = this.props.todoListItem.task;
-        let visible = this.state.visible;
-
+        const { todo } = this.props
         return (
-            <div className={'todolist-task '+(visible ? 'none': '')} >
-                <input className="checkbox" type="checkbox"/>
-                <span className="task" >{task}</span>
+            <div className={ 'todolist-task ' + classnames ({
+                    completed: todo.completed
+                })}>
+                <input className="checkbox"
+                       type="checkbox"
+                       checked={todo.completed}
+                       onChange={this.taskCompleteClick}
+                />
+                <span className="task" > {todo.text}</span>
                 <span>Total time is 00:00:00 <button>Start</button> </span>
-                <a onClick={this.clickCloseButton} href="#" className={'close-task'+(visible ? 'none': '')}>X</a>
-            </div>
+              </div>
         )
     }
 }

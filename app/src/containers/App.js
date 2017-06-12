@@ -1,40 +1,36 @@
-import React, { Component, PropTypes} from 'react';
-import TodoList from '../components/TodoList';
-import CreatTodoInput from '../components/CreatTodoInput';
+import React from 'react';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import TopSection from '../components/TopSection'
+import TodoList from '../components/TodoList'
+import * as TodoActions from '../actions'
 
-let todoList = [
-    {
-        "task":"task1",
-    },
-    {
-        "task":"task2",
-    },
-    {
-        "task":"task3",
-    },
-    {
-        "task":"task4",
-    },
-    {
-        "task":"task5",
-    }
-];
+const App = props => (
+    <div>
+        <TopSection addTodo={props.actions.addTodo} />
+        <TodoList {...props} />
+    </div>
+)
 
 
+/*Определяем метод mapStateToProps для чтения состояния*/
 
-export default class App extends Component {
-    render () {
-        return (
-            <div className="todolist">
-                <h1>Create your plans</h1>
+const mapStateToProps = state => ({
+    todos: state.todos.todos
+})
 
-                <CreatTodoInput />
+/*Определяем метод mapDispatchToProps для передачи события. mapDispatchToProps отправляет действие. Это единственный способ изменить состояние.*/
 
-                <div className="todolist-wrapper">
-                    <TodoList todoListArray={todoList} />
-                </div>
-            </div>
-        );
-    }
-}
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(TodoActions, dispatch)
+})
+
+/*Генерируем компонент путем передачи созданных функций в connect(). Результат работы функции connect - новый присоединенный компонент, который оборачивает переданный компонент.*/
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App)
+
+
 
