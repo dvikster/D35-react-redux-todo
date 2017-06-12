@@ -1,24 +1,22 @@
-import React from 'react';
+import React, { Component, PropTypes} from 'react';
 
-var TodoListItem = React.createClass({
-    propTypes: {
+export default class TodoListItem extends Component {
+    static propTypes = {
         todoListItem:React.PropTypes.shape({
             task: React.PropTypes.string.isRequired
         })
-    },
-    getInitialState: function () {
-        return{
+    }
+    state =  {
             visible: false
-        };
-    },
-    clickCloseButton:function (e) {
+    }
+    clickCloseButton = (e) => {
         e.preventDefault();
-        this.setState({visible:true});
-    },
+        this.setState({visible:true})
+    }
 
-    render: function(){
-        var task = this.props.todoListItem.task,
-            visible = this.state.visible;
+    render(){
+        let task = this.props.todoListItem.task;
+        let visible = this.state.visible;
 
         return (
             <div className={'todolist-task '+(visible ? 'none': '')} >
@@ -29,6 +27,4 @@ var TodoListItem = React.createClass({
             </div>
         )
     }
-});
-
-export default TodoListItem;
+}

@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { Component, PropTypes} from 'react';
 import TodoListItem from './TodoListItem';
 
 
-
-var TodoList = React.createClass({
-    propTypes: {
+export default class TodoList extends Component {
+// var TodoList = React.createClass({
+    static propTypes = {
         todoListArray: React.PropTypes.array.isRequired
-    },
-    render: function() {
-        var dataArray = this.props.todoListArray;
-        var todoListTemplate;
+    }
+    render() {
+        let dataArray = this.props.todoListArray;
+        let todoListTemplate;
 
         if (dataArray.length > 0) {
             todoListTemplate = dataArray.map(function (item, index) {
@@ -28,8 +28,6 @@ var TodoList = React.createClass({
                 {todoListTemplate}
                 <div className={dataArray.length > 0 ? '' : 'none'} style={{padding:'20px'}}>{dataArray.length} items left</div>
             </div>
-        );
+        )
     }
-});
-
-export default TodoList;
+}

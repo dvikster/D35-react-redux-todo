@@ -1,8 +1,8 @@
-import React from 'react';
-import TodoList from './TodoList';
-import CreatTodoInput from './CreatTodoInput';
+import React, { Component, PropTypes} from 'react';
+import TodoList from '../components/TodoList';
+import CreatTodoInput from '../components/CreatTodoInput';
 
-var todoList = [
+let todoList = [
     {
         "task":"task1",
     },
@@ -21,8 +21,9 @@ var todoList = [
 ];
 
 
-var App = React.createClass({
-    render: function() {
+
+export default class App extends Component {
+    render () {
         return (
             <div className="todolist">
                 <h1>Create your plans</h1>
@@ -35,6 +36,5 @@ var App = React.createClass({
             </div>
         );
     }
-});
+}
 
-export default App;
