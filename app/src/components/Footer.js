@@ -11,7 +11,7 @@ export default class Footer extends Component {
     render() {
         return (
             <footer className="todolist footer">
-                <button onClick={this.clearCompletedButton} >Clear Completed</button>
+                <button onClick={this.clearCompletedButton}>Clear Completed</button>
             </footer>
         )
     }
