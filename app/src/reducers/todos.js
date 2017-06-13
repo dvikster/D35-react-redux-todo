@@ -1,4 +1,4 @@
-import { ADD_TODO, COMPLETE_TODO } from '../constants/ActionTypes'
+import { ADD_TODO, COMPLETE_TODO, DELETE_TODO, CLEAR_COMPLETED } from '../constants/ActionTypes'
 
 const initialState = {
   todos: [{
@@ -24,13 +24,22 @@ export default function todos(state = initialState, action) {
         }])
       }
     }
-      case COMPLETE_TODO: {
+    case COMPLETE_TODO: {
           return {
             ...state,
               todos: [...state.todos].map(
                   todo => todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
               )}
       }
+
+    case DELETE_TODO: {
+        return {...state, todos: [...state.todos].filter(todo => todo.id !== action.id)}
+    }
+
+    case CLEAR_COMPLETED: {
+        return {...state, todos: [...state.todos].filter(todo => todo.completed === false)}
+    }
+
     default:
       return state
   }

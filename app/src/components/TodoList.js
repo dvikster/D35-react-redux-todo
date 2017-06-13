@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import TodoListItem from './TodoListItem'
 
-export default class MainSection extends Component {
+export default class TodoList extends Component {
 
     static propTypes = {
         todos: PropTypes.array.isRequired,

@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import CreatTodoInput from './CreatTodoInput'
 
-export default class Header extends Component {
+export default class TopSection extends Component {
     static propTypes = {
         addTodo: PropTypes.func.isRequired
     }

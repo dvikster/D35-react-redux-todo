@@ -9,6 +9,9 @@ export default class TodoListItem extends Component {
     taskCompleteClick = () =>  {
         this.props.completeTodo(this.props.todo.id);
     }
+    deleteClick = () =>  {
+        this.props.deleteTodo(this.props.todo.id);
+    }
     render(){
         const { todo } = this.props
         return (
@@ -22,7 +25,8 @@ export default class TodoListItem extends Component {
                 />
                 <span className="task" > {todo.text}</span>
                 <span>Total time is 00:00:00 <button>Start</button> </span>
-              </div>
+                <a onClick={this.deleteClick} href="#" className={'close-task'}>X</a>
+            </div>
         )
     }
 }

@@ -3,12 +3,14 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import TopSection from '../components/TopSection'
 import TodoList from '../components/TodoList'
+import Footer from '../components/Footer'
 import * as TodoActions from '../actions'
 
 const App = props => (
     <div>
         <TopSection addTodo={props.actions.addTodo} />
         <TodoList {...props} />
+        <Footer {...props} clearCompleted={props.actions.clearCompleted}/>
     </div>
 )
 
